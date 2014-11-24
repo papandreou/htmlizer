@@ -310,6 +310,14 @@ describe('run no conflict sub-template test', function () {
     });
 });
 
+describe('doctype/complete document test', function () {
+    var html = fetch('test/doctype.html'),
+        outputHtml = new Htmlizer(html, {noConflict: true}).toString();
+    it('it should contain the <!DOCTYPE> when reserialized', function () {
+        assert.ok(/^<!DOCTYPE/.test(outputHtml));
+    });
+});
+
 /*Utility functions*/
 function fetch(pathToTextFile) {
     return fs.readFileSync(pathToTextFile, {encoding: 'utf8'});
